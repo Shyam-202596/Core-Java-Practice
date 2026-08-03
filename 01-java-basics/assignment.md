@@ -103,6 +103,7 @@ Expected idea:
 ```java
 Student s1 = new Student();
 Student s2 = s1;
+```
 
 ## Create flowchart and pseudocode for the following:
 
