@@ -481,3 +481,405 @@ Compares references for objects.
 equals():
 Can compare logical equality if overridden.
 ```
+
+---
+
+# equals() and hashCode() Contract
+
+## 1. Why equals() and hashCode() Matter
+
+`equals()` is used to check logical equality between objects.
+
+`hashCode()` returns an integer hash value used by hash-based collections.
+
+Common hash-based collections:
+
+```text
+HashMap
+HashSet
+Hashtable
+LinkedHashMap
+LinkedHashSet
+```
+
+If a class overrides `equals()`, it should also override `hashCode()`.
+
+---
+
+## 2. Default Behavior from Object Class
+
+If a class does not override `equals()` and `hashCode()`, then default behavior comes from `Object`.
+
+Default `equals()` compares references.
+
+```java
+obj1.equals(obj2)
+```
+
+Default behavior is similar to:
+
+```java
+obj1 == obj2
+```
+
+Default `hashCode()` usually returns a value related to object identity.
+
+---
+
+## 3. equals() Contract
+
+The `equals()` method should follow these rules.
+
+### 1. Reflexive
+
+An object must be equal to itself.
+
+```java
+x.equals(x) == true
+```
+
+### 2. Symmetric
+
+If `x.equals(y)` is true, then `y.equals(x)` must also be true.
+
+```java
+x.equals(y) == y.equals(x)
+```
+
+### 3. Transitive
+
+If `x.equals(y)` is true and `y.equals(z)` is true, then `x.equals(z)` must be true.
+
+```java
+if x == y and y == z, then x == z
+```
+
+### 4. Consistent
+
+Multiple calls to `equals()` should return the same result if object data has not changed.
+
+```java
+x.equals(y)
+```
+
+should not randomly change from `true` to `false`.
+
+### 5. Null Check
+
+Any object compared with `null` should return `false`.
+
+```java
+x.equals(null) == false
+```
+
+---
+
+## 4. hashCode() Contract
+
+The `hashCode()` method should follow these rules.
+
+### Rule 1
+
+If two objects are equal using `equals()`, then both objects must have the same hash code.
+
+```java
+if a.equals(b) == true
+then a.hashCode() == b.hashCode()
+```
+
+### Rule 2
+
+If two objects have the same hash code, they may or may not be equal.
+
+```text
+Same hashCode does not always mean objects are equal.
+```
+
+This situation is called hash collision.
+
+### Rule 3
+
+If object data does not change, `hashCode()` should return the same value again and again.
+
+---
+
+## 5. Most Important Rule
+
+If two objects are equal, their hash codes must be equal.
+
+```text
+Equal objects must have equal hash codes.
+```
+
+But reverse is not always true.
+
+```text
+Equal hash codes do not guarantee equal objects.
+```
+
+---
+
+## 6. Problem Without hashCode()
+
+If we override only `equals()` and not `hashCode()`, hash-based collections may behave incorrectly.
+
+Example:
+
+```java
+import java.util.HashSet;
+
+class Employee {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Employee other = (Employee) obj;
+
+        return this.id == other.id && this.name.equals(other.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee e1 = new Employee(1, "Shyam");
+        Employee e2 = new Employee(1, "Shyam");
+
+        HashSet<Employee> set = new HashSet<>();
+
+        set.add(e1);
+        set.add(e2);
+
+        System.out.println(set.size());
+    }
+}
+```
+
+Expected:
+
+```text
+1
+```
+
+But actual output can be:
+
+```text
+2
+```
+
+Reason:
+
+`equals()` says both objects are equal, but `hashCode()` is not overridden.
+
+So `HashSet` may treat them as different objects.
+
+---
+
+## 7. Correct equals() and hashCode()
+
+```java
+import java.util.Objects;
+
+class Employee {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Employee other = (Employee) obj;
+
+        return this.id == other.id && Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+}
+```
+
+Now this works correctly:
+
+```java
+Employee e1 = new Employee(1, "Shyam");
+Employee e2 = new Employee(1, "Shyam");
+
+System.out.println(e1.equals(e2));
+System.out.println(e1.hashCode() == e2.hashCode());
+```
+
+Output:
+
+```text
+true
+true
+```
+
+---
+
+## 8. Why Objects.equals() is Used
+
+Use:
+
+```java
+Objects.equals(this.name, other.name)
+```
+
+Instead of:
+
+```java
+this.name.equals(other.name)
+```
+
+Because `Objects.equals()` handles `null` safely.
+
+Example:
+
+```java
+Objects.equals(null, null);      // true
+Objects.equals(null, "Java");    // false
+```
+
+---
+
+## 9. HashMap and HashSet Usage
+
+`HashMap` and `HashSet` use hash code to find the bucket.
+
+Then they use `equals()` to compare objects inside that bucket.
+
+Simple flow:
+
+```text
+Step 1: Calculate hashCode()
+Step 2: Find bucket
+Step 3: Use equals() to check actual equality
+```
+
+---
+
+## 10. Common Mistakes
+
+### Mistake 1: Overriding equals() but not hashCode()
+
+Wrong:
+
+```java
+@Override
+public boolean equals(Object obj) {
+    // custom logic
+}
+```
+
+Correct:
+
+```java
+@Override
+public boolean equals(Object obj) {
+    // custom logic
+}
+
+@Override
+public int hashCode() {
+    return Objects.hash(fields);
+}
+```
+
+---
+
+### Mistake 2: Using Mutable Fields in hashCode()
+
+Avoid using fields in `hashCode()` if those fields can change after inserting object into `HashSet` or `HashMap`.
+
+Example problem:
+
+```java
+HashSet<Employee> set = new HashSet<>();
+set.add(employee);
+
+employee.name = "Updated";
+```
+
+If `name` is part of `hashCode()`, then finding the object again may fail.
+
+---
+
+### Mistake 3: Comparing Strings with ==
+
+Wrong:
+
+```java
+this.name == other.name
+```
+
+Correct:
+
+```java
+Objects.equals(this.name, other.name)
+```
+
+---
+
+## 11. SDE-2 Notes
+
+- Always override `hashCode()` when overriding `equals()`.
+- Use the same fields in both `equals()` and `hashCode()`.
+- Prefer immutable fields for equality.
+- Be careful when using mutable objects as keys in `HashMap`.
+- `HashSet` internally uses hashing and equality to avoid duplicates.
+- `HashMap` uses `hashCode()` first and `equals()` later.
+- Use IDE-generated `equals()` and `hashCode()` for production code.
+- Java records automatically generate `equals()`, `hashCode()`, and `toString()`.
+
+---
+
+## Quick Revision
+
+```text
+equals():
+Checks logical equality.
+
+hashCode():
+Returns integer hash value.
+
+Contract:
+If two objects are equal, their hash codes must be equal.
+
+Hash collision:
+Two different objects can have same hash code.
+
+HashMap:
+Uses hashCode() to find bucket and equals() to compare keys.
+
+HashSet:
+Uses hashCode() and equals() to avoid duplicates.
+
+Best practice:
+Override equals() and hashCode() together.
+```
