@@ -1,7 +1,7 @@
 //7. Write a program to make cloning Employee class object by writing our own myClone() method, from where Object class clone() method is called.
 
 //Cloning example
-public class CloneDemo{
+public class CloningDemo{
 	public static void main(String[] args) throws CloneNotSupportedException{
 		
 		//create Employee class object using new operator

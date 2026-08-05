@@ -1,6 +1,6 @@
 //5. Write a program where equals() method compares Myclass objects' references. The same equals() method is used to compare Integer class objects' contents.
 //equals() method 
-public class Compares{
+public class EqualsMethodDemo{
 	public static void main(String[] args){
 		
 		//create two Myclass objects with same content.

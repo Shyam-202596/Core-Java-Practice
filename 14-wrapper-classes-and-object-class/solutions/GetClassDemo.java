@@ -1,5 +1,5 @@
 //6. Write a program where an object is passed to printName() method and the class name of the object is displayed by the method. 
-public class Demo{
+public class GetClassDemo{
 	public static void main(String[] args){
 		//create Myclass object obj 
 		Myclass obj = new Myclass(11);
