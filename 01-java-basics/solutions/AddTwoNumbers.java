@@ -9,6 +9,8 @@ public class AddTwoNumbers {
         int num2 = sc.nextInt();
         int ans = add(num1, num2);    
         System.out.println("Sum of both the number is: " + ans);
+
+        sc.close();
     }
     static int add(int num1, int num2){
 	    return num1 + num2;
