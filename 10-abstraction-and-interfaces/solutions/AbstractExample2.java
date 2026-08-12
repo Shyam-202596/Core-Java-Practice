@@ -1,4 +1,4 @@
-/*3. Write a program in which abstract class Car contains an instance variable, one concrete method
+/*3. (Book) Write a program in which abstract class Car contains an instance variable, one concrete method
      and two abstract methods.
 **/
 public class AbstractExample2 {

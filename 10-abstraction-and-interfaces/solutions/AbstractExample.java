@@ -1,4 +1,4 @@
-//2. Let us make a proram where the abstract class Calculate has one abstract method which has got various implementations in sub classes. 
+//2. (Book) Let us make a proram where the abstract class Calculate has one abstract method which has got various implementations in sub classes. 
 public class AbstractExample {
     public static void main(String[] args) {
         Sub1 obj1 = new Sub1();
