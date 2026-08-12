@@ -8,6 +8,14 @@ public class AbstractExample {
         obj1.calculate(3);
         obj2.calculate(4);
         obj3.calculate(5);
+
+        Calculate ref; // ref is reference of Calculate 
+        ref = obj1;   // ref is refering to obj1
+        ref.calculate(6); // call obj1's claculate() method
+        ref = obj2;
+        ref.calculate(16);
+        ref = obj3;
+        ref.calculate(3);
     }
 }
 abstract class Calculate{
@@ -20,7 +28,7 @@ class Sub1 extends Calculate{
 }
 class Sub2 extends Calculate{
     void calculate(double x){
-        System.out.println("Square root: " + Math.sqrt(x*x));
+        System.out.println("Square root: " + Math.sqrt(x));
     }
 }
 class Sub3 extends Calculate{
