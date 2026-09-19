@@ -22,7 +22,7 @@ class Myclass{
 class KnowName{
 	static void printName(Object obj){
 		//get the class name into an object c of the class Class.
-		Class c = obj.getClass();
+		Class<?> c = obj.getClass();
 		//get the name of the class using getName()
 		String name = c.getName();
 		System.out.println("The class name = "+ name);
