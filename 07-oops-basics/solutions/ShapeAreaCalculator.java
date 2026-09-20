@@ -6,7 +6,7 @@ public class ShapeAreaCalculator {
         Shape rectangle = new Rectangle(4, 6);
         Shape triangle = new Triangle(3, 4, 5);
         Shape[] shapes = {circle, rectangle, triangle};
-        // List<Shape> shapes = List.of(new Circle(7), new Rectangle(16, 14), new Triangle(3, 4, 5));
+        //List<Shape> shapes = List.of(new Circle(7), new Rectangle(16, 14), new Triangle(3, 4, 5));
         for(Shape shape : shapes){
             System.out.println("Shape: " + shape.getName());
             System.out.println("Area: " + shape.calculateArea());
