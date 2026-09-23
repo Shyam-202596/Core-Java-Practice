@@ -41,3 +41,32 @@ Write a program that shows the use of the `Vector` class. Take an `int[]` type a
 Write a program to create a queue with Integer objects.
 
 ---
+## 8. HashMap
+
+Write a program to show the use of the `HashMap` class.
+
+---
+
+## 9. Hashtable
+
+Write a program that shows the use of the `Hashtable` class.
+
+---
+
+## 10. Arrays Class Built-in Methods
+
+Write a program to show the use of `Arrays` class built-in methods.
+
+---
+
+## 11. Sorting Using Comparator Interface
+
+Write a program to show sorting using the `Comparator` interface.
+
+---
+
+## 12. StringTokenizer
+
+Write a program to show the use of the `StringTokenizer` object.
+
+---
