@@ -70,3 +70,21 @@ Write a program to show sorting using the `Comparator` interface.
 Write a program to show the use of the `StringTokenizer` object.
 
 ---
+
+## 13. Calendar Class
+
+Write a program that shows the uses of the `Calendar` class.
+
+---
+
+## 14. Date Class
+
+Write a program that shows the uses of the `Date` class.
+
+---
+
+## 15. ArrayList of Employee Objects
+
+Write a program where an `ArrayList` handles a group of `Employee` class objects.
+
+---
