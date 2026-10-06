@@ -9,10 +9,10 @@ public class JodaTime2 {
         System.out.printf("%nLocalDateTime object with some date and time: %n%s", dt1);
         System.out.printf("%n5 months from now: %n%s", dt.plusMonths(5));
         System.out.printf("%n5 months ago: %n%s", dt.minusMonths(5));
-        DayOFWeek dw = dt.getDayOfWeek();
-        String s = dw.name();
-        System.out.printf("%nDay of the week name: %n%s", s);
-        int n = dw.getValue();
-        System.out.printf("%nDay of the week value: %n%s", n);
+        //DayOFWeek dw = dt.getDayOfWeek();
+        //String s = dw.name();
+        //System.out.printf("%nDay of the week name: %n%s", s);
+        //int n = dw.getValue();
+        //System.out.printf("%nDay of the week value: %n%s", n);
     }
 }

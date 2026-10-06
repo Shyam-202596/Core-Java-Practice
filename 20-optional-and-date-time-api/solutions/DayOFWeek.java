@@ -1,0 +1,6 @@
+/**
+ * DayOFWeek
+ */
+public enum DayOFWeek {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+}
