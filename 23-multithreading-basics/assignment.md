@@ -63,6 +63,7 @@ Write a program in which the Consumer thread is informed immediately when data p
 ## 11. Thread Priorities
 
 Write a program to understand thread priorities, where a thread with a higher priority number is expected to receive preference for execution.
+> **Note:** A thread with a higher priority is not guaranteed to complete its execution first. Thread priority only provides a scheduling hint to the JVM thread scheduler.
 
 ---
 
